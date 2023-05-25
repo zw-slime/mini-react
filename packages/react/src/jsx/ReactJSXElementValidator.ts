@@ -7,7 +7,8 @@ export function jsxWithValidation(type,props,key,isStaticChildren,source,self) {
     console.error('React.jsx type is invalid')
   }
 
-  const elemt = jsxDEV(type,props,key,source,self);
+  const element = jsxDEV(type,props,key,source,self);
+  return element;
 }
 
 export function isValidElementType(type):boolean {

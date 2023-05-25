@@ -1,7 +1,7 @@
 import ReactCurrentOwner from '../ReactCurrentOwner';
 import { hasValidKey, hasValidRef } from './jsx/ReactJSXElement';
 
-import {ReactElement as _ReactElement} from './jsx/ReactJSXElement'
+import {REACT_ELEMENT_TYPE} from "../../shared/ReactSymbols";
 
 export function ReactElement(type,config,children) {
   let propName;
@@ -54,5 +54,19 @@ export function ReactElement(type,config,children) {
     props.children = childArray
   }
 
-  return _ReactElement(type,key,ref,self,source,ReactCurrentOwner.current,props)
+
+  const element = {
+    $$typeof: REACT_ELEMENT_TYPE,
+
+    type,
+    key,
+    ref,
+    props,
+    _owner: ReactCurrentOwner.current,
+    _store: false,
+    _self: self,
+    _source: source
+  };
+
+  return element
 }
